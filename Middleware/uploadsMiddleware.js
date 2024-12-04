@@ -3,11 +3,10 @@ import cloudinary from '../config/cloudinary.js';
 import multerStorageCloudinary from 'multer-storage-cloudinary';
 
 const storage = multerStorageCloudinary({
-  cloudinary: cloudinary,  // Используем настроенную библиотеку cloudinary
-  params: {
-    folder: 'your_folder_name',  // Укажите имя папки, куда будут загружаться изображения
-    allowed_formats: ['jpeg', 'jpg', 'png'],  // Разрешенные форматы изображений
-  },
+  cloudinary: cloudinary,  // Ваши настройки Cloudinary
+  folder: 'uploads',       // Указываем папку в Cloudinary
+  allowedFormats: ['jpeg', 'jpg', 'png'],  // Разрешенные форматы
+  transformation: [{ quality: 'auto', fetch_format: 'auto' }],
 });
 
 const fileFilter = (req, file, cb) => {
