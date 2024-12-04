@@ -2,6 +2,7 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 import Post from "../Models/postModel.js";
 import path, { dirname } from "path";
+import cloudinary from '../config/cloudinary.js';
 
 //---------------Создание поста-------------------
 
