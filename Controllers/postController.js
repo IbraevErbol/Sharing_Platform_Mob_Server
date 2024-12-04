@@ -10,7 +10,7 @@ export const createPost = async (req, res) => {
     const { title, content } = req.body;
 
     const imageUrl = req.file
-      ? `http://192.168.0.139:2000/uploads/${req.file.filename}`
+      ? `https://sharing-platform-mob-server.onrender.com/uploads/${req.file.filename}`
       : null;
 
     const newPost = new Post({
@@ -86,7 +86,7 @@ export const deletePosts = async (req, res) => {
     }
 
     if (post.imageUrl) {
-      const imagePath = post.imageUrl.replace("http://192.168.0.139:2000", "");
+      const imagePath = post.imageUrl.replace("https://sharing-platform-mob-server.onrender.com", "");
       const filePath = path.join(
         dirname(fileURLToPath(import.meta.url)),
         "..",
