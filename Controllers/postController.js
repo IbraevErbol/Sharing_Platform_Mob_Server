@@ -91,19 +91,14 @@ export const deletePosts = async (req, res) => {
     if (post.imageUrl) {
       const imagePublicId = post.imageUrl.split('/').pop().split('.')[0];
       // const imagePath = post.imageUrl.replace("https://sharing-platform-mob-server.onrender.com", "");
-      await cloudinary.uploader.destroy(imagePublicId);
-      // const filePath = path.join(
-      //   dirname(fileURLToPath(import.meta.url)),
-      //   "..",
-      //   imagePath
-      // );
-
-      // if (fs.existsSync(filePath)) {
-      //   fs.unlinkSync(filePath);
-      //   // console.log("Изображение успешно удалено:", filePath);
-      // }else{
-      //   console.log("Изображение не найдено:", filePath);
-      // }
+      cloudinary.uploader.destroy(imagePublicId, (error, result) => {
+        if (error) {
+          console.error("Ошибка при удалении изображения из Cloudinary:", error);
+          return res.status(500).json({ message: "Ошибка при удалении изображения" });
+        }
+        console.log("Изображение удалено из Cloudinary:", result);
+      });
+      
     }
     
     const deletePost = await Post.findByIdAndDelete(postId);
